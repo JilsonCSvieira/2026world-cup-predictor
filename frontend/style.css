@@ -78,3 +78,33 @@ button:hover {
 label {
     font-weight: bold;
 }
+#standings table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background: #1e293b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#standings th {
+    background: #22c55e;
+    color: white;
+    padding: 12px;
+}
+
+#standings td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+}
+
+#standings tr:hover {
+    background: #334155;
+}
+
+#standings h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #22c55e;
+}

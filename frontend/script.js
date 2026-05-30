@@ -1,6 +1,8 @@
 const matchSelect = document.getElementById("matchSelect");
 const predictBtn = document.getElementById("predictBtn");
 const groupFilter = document.getElementById("groupFilter");
+const simulateBtn = document.getElementById("simulateBtn");
+const standingsDiv = document.getElementById("standings");
 
 const winner = document.getElementById("winner");
 const chance = document.getElementById("chance");
@@ -116,4 +118,106 @@ predictBtn.addEventListener("click", function () {
     chance.textContent = `${teamA.name}: ${teamAChance.toFixed(1)}% | ${teamB.name}: ${teamBChance.toFixed(1)}%`;
     teamScores.textContent = `Team Scores: ${teamA.name} ${teamAScore} - ${teamB.name} ${teamBScore}`;
     reason.textContent = `Reason: ${predictionReason}`;
+
+simulateBtn.addEventListener("click", function () {
+    const standings = {};
+
+    matches.forEach(match => {
+        if (!standings[match.group]) {
+            standings[match.group] = {};
+        }
+
+        const teamA = findTeam(match.teamA);
+        const teamB = findTeam(match.teamB);
+
+        if (!standings[match.group][teamA.name]) {
+            standings[match.group][teamA.name] = createStanding(teamA.name);
+        }
+
+        if (!standings[match.group][teamB.name]) {
+            standings[match.group][teamB.name] = createStanding(teamB.name);
+        }
+
+        const teamAScore = getTotalScore(teamA);
+        const teamBScore = getTotalScore(teamB);
+
+        if (teamAScore > teamBScore) {
+            standings[match.group][teamA.name].points += 3;
+            standings[match.group][teamA.name].wins += 1;
+            standings[match.group][teamB.name].losses += 1;
+        }
+        else if (teamBScore > teamAScore) {
+            standings[match.group][teamB.name].points += 3;
+            standings[match.group][teamB.name].wins += 1;
+            standings[match.group][teamA.name].losses += 1;
+        }
+        else {
+            standings[match.group][teamA.name].points += 1;
+            standings[match.group][teamB.name].points += 1;
+            standings[match.group][teamA.name].draws += 1;
+            standings[match.group][teamB.name].draws += 1;
+        }
+
+        standings[match.group][teamA.name].played += 1;
+        standings[match.group][teamB.name].played += 1;
+    });
+
+    displayStandings(standings);
+});
+function createStanding(teamName) {
+    return {
+        team: teamName,
+        played: 0,
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        points: 0
+    };
+}
+
+function displayStandings(standings) {
+    standingsDiv.innerHTML = "";
+
+    const groups = Object.keys(standings).sort();
+
+    groups.forEach(group => {
+        const groupTitle = document.createElement("h3");
+        groupTitle.textContent = `🏆 Group ${group}`;
+        standingsDiv.appendChild(groupTitle);
+
+        const table = document.createElement("table");
+
+        table.innerHTML = `
+            <tr>
+                <th>Team</th>
+                <th>MP</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>Pts</th>
+            </tr>
+        `;
+
+        const teamsArray = Object.values(standings[group]);
+
+        teamsArray.sort((a, b) => b.points - a.points);
+
+        teamsArray.forEach(team => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${team.team}</td>
+                <td>${team.played}</td>
+                <td>${team.wins}</td>
+                <td>${team.draws}</td>
+                <td>${team.losses}</td>
+                <td>${team.points}</td>
+            `;
+
+            table.appendChild(row);
+        });
+
+        standingsDiv.appendChild(table);
+    });
+}    
 });
