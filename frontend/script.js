@@ -120,6 +120,7 @@ predictBtn.addEventListener("click", function () {
     chance.textContent = `${teamA.name}: ${teamAChance.toFixed(1)}% | ${teamB.name}: ${teamBChance.toFixed(1)}%`;
     teamScores.textContent = `Team Scores: ${teamA.name} ${teamAScore} - ${teamB.name} ${teamBScore}`;
     reason.textContent = `Reason: ${predictionReason}`;
+});
 
 function simulateMatch(teamA, teamB) {
     const teamAScore = getTotalScore(teamA);
@@ -289,17 +290,33 @@ function getQualifiedTeams(standings) {
             return teamBStrength - teamAStrength;
         });
 
-        qualifiedTeams.push(teamsArray[0].team);
-        qualifiedTeams.push(teamsArray[1].team);
-        thirdPlaceTeams.push(teamsArray[2]);
+        qualifiedTeams.push({
+            name: teamsArray[0].team,
+            group: group,
+            position: 1
+        });
+
+        qualifiedTeams.push({
+            name: teamsArray[1].team,
+            group: group,
+            position: 2
+        });
+
+        thirdPlaceTeams.push({
+            name: teamsArray[2].team,
+            group: group,
+            position: 3,
+            points: teamsArray[2].points,
+            wins: teamsArray[2].wins
+        });
     });
 
     thirdPlaceTeams.sort((a, b) => {
         if (b.points !== a.points) return b.points - a.points;
         if (b.wins !== a.wins) return b.wins - a.wins;
 
-        const teamAStrength = getTotalScore(findTeam(a.team));
-        const teamBStrength = getTotalScore(findTeam(b.team));
+        const teamAStrength = getTotalScore(findTeam(a.name));
+        const teamBStrength = getTotalScore(findTeam(b.name));
 
         return teamBStrength - teamAStrength;
     });
@@ -307,11 +324,32 @@ function getQualifiedTeams(standings) {
     const bestThirdPlaceTeams = thirdPlaceTeams.slice(0, 8);
 
     bestThirdPlaceTeams.forEach(team => {
-        qualifiedTeams.push(team.team);
+        qualifiedTeams.push(team);
     });
 
     return qualifiedTeams;
-} 
+}
+function createRoundOf32Pairings(qualifiedTeams) {
+    const teams = [...qualifiedTeams];
+    const pairings = [];
+
+    while (teams.length > 0) {
+        const teamA = teams.shift();
+
+        let opponentIndex = teams.findIndex(team => team.group !== teamA.group);
+
+        if (opponentIndex === -1) {
+            opponentIndex = 0;
+        }
+
+        const teamB = teams.splice(opponentIndex, 1)[0];
+
+        pairings.push(teamA.name);
+        pairings.push(teamB.name);
+    }
+
+    return pairings;
+}
 function simulateKnockoutRound(teamsList) {
     const winners = [];
     const matchesPlayed = [];
@@ -348,5 +386,107 @@ function simulateKnockoutRound(teamsList) {
         winners: winners,
         matchesPlayed: matchesPlayed
     };
-}  
+} 
+function simulateGroupStageOnly() {
+    const standings = {};
+
+    matches.forEach(match => {
+        if (!standings[match.group]) {
+            standings[match.group] = {};
+        }
+
+        const teamA = findTeam(match.teamA);
+        const teamB = findTeam(match.teamB);
+
+        if (!standings[match.group][teamA.name]) {
+            standings[match.group][teamA.name] = createStanding(teamA.name);
+        }
+
+        if (!standings[match.group][teamB.name]) {
+            standings[match.group][teamB.name] = createStanding(teamB.name);
+        }
+
+        const result = simulateMatch(teamA, teamB);
+
+        if (result === "teamA") {
+            standings[match.group][teamA.name].points += 3;
+            standings[match.group][teamA.name].wins += 1;
+            standings[match.group][teamB.name].losses += 1;
+        }
+        else if (result === "teamB") {
+            standings[match.group][teamB.name].points += 3;
+            standings[match.group][teamB.name].wins += 1;
+            standings[match.group][teamA.name].losses += 1;
+        }
+        else {
+            standings[match.group][teamA.name].points += 1;
+            standings[match.group][teamB.name].points += 1;
+            standings[match.group][teamA.name].draws += 1;
+            standings[match.group][teamB.name].draws += 1;
+        }
+
+        standings[match.group][teamA.name].played += 1;
+        standings[match.group][teamB.name].played += 1;
+    });
+
+    return standings;
+} 
+function displayWorldCupSimulation(roundOf32, roundOf16, quarterfinals, semifinals, final, champion) {
+    worldCupOutput.innerHTML = "";
+
+    const championCard = document.createElement("div");
+    championCard.classList.add("champion-card");
+
+    championCard.innerHTML = `
+        <h3>🏆 Predicted World Cup Champion</h3>
+        <p>${champion}</p>
+    `;
+
+    worldCupOutput.appendChild(championCard);
+
+    displayRound("Round of 32", roundOf32);
+    displayRound("Round of 16", roundOf16);
+    displayRound("Quarterfinals", quarterfinals);
+    displayRound("Semifinals", semifinals);
+    displayRound("Final", final);
+}
+
+function displayRound(roundName, roundData) {
+    const roundCard = document.createElement("div");
+    roundCard.classList.add("round-card");
+
+    let matchesHTML = `<h3>${roundName}</h3>`;
+
+    roundData.matchesPlayed.forEach(match => {
+        matchesHTML += `
+            <p>${match.teamA} vs ${match.teamB} → <strong>${match.winner}</strong></p>
+        `;
+    });
+
+    roundCard.innerHTML = matchesHTML;
+
+    worldCupOutput.appendChild(roundCard);
+}
+
+worldCupBtn.addEventListener("click", function () {
+    const standings = simulateGroupStageOnly();
+    const qualifiedTeams = getQualifiedTeams(standings);
+
+    const roundOf32Teams = createRoundOf32Pairings(qualifiedTeams);
+    const roundOf32 = simulateKnockoutRound(roundOf32Teams);
+    const roundOf16 = simulateKnockoutRound(roundOf32.winners);
+    const quarterfinals = simulateKnockoutRound(roundOf16.winners);
+    const semifinals = simulateKnockoutRound(quarterfinals.winners);
+    const final = simulateKnockoutRound(semifinals.winners);
+
+    const champion = final.winners[0];
+
+    displayWorldCupSimulation(
+        roundOf32,
+        roundOf16,
+        quarterfinals,
+        semifinals,
+        final,
+        champion
+    );
 });

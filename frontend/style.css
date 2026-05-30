@@ -108,3 +108,44 @@ label {
     margin-bottom: 10px;
     color: #22c55e;
 }
+
+.champion-card {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+}
+
+.champion-card h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.champion-card p {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.round-card {
+    background: #0f172a;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    border: 1px solid #334155;
+}
+
+.round-card h3 {
+    color: #22c55e;
+    margin-bottom: 12px;
+}
+
+.round-card p {
+    text-align: left;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+}
