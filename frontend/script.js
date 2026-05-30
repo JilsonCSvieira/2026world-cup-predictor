@@ -15,6 +15,57 @@ const teamScores = document.getElementById("teamScores");
 
 let matches = [];
 let teams = [];
+const flags = {
+    "Argentina": "🇦🇷",
+    "Brazil": "🇧🇷",
+    "France": "🇫🇷",
+    "Spain": "🇪🇸",
+    "England": "🏴",
+    "Portugal": "🇵🇹",
+    "Germany": "🇩🇪",
+    "Netherlands": "🇳🇱",
+    "Belgium": "🇧🇪",
+    "Croatia": "🇭🇷",
+    "Morocco": "🇲🇦",
+    "Uruguay": "🇺🇾",
+    "Colombia": "🇨🇴",
+    "Senegal": "🇸🇳",
+    "Switzerland": "🇨🇭",
+    "USA": "🇺🇸",
+    "Mexico": "🇲🇽",
+    "Canada": "🇨🇦",
+    "Japan": "🇯🇵",
+    "South Korea": "🇰🇷",
+    "Australia": "🇦🇺",
+    "Türkiye": "🇹🇷",
+    "Qatar": "🇶🇦",
+    "Norway": "🇳🇴",
+    "Scotland": "🏴",
+    "Egypt": "🇪🇬",
+    "Ivory Coast": "🇨🇮",
+    "Algeria": "🇩🇿",
+    "Czechia": "🇨🇿",
+    "Tunisia": "🇹🇳",
+    "Paraguay": "🇵🇾",
+    "South Africa": "🇿🇦",
+    "Saudi Arabia": "🇸🇦",
+    "Panama": "🇵🇦",
+    "Ghana": "🇬🇭",
+    "Bosnia and Herzegovina": "🇧🇦",
+    "Iraq": "🇮🇶",
+    "Uzbekistan": "🇺🇿",
+    "New Zealand": "🇳🇿",
+    "Jordan": "🇯🇴",
+    "Congo DR": "🇨🇩",
+    "Haiti": "🇭🇹",
+    "Cape Verde": "🇨🇻",
+    "Curaçao": "🇨🇼",
+    "Sweden": "🇸🇪",
+    "Iran": "🇮🇷"
+};
+function getFlag(teamName) {
+    return "";
+}
 
 fetch("../data/matches.json")
     .then(response => response.json())

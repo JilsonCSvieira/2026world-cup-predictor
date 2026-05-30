@@ -12,6 +12,69 @@ body {
     padding: 40px;
 }
 
+.hero {
+    text-align: center;
+    padding: 60px 30px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff4d1f,
+        #6d28d9,
+        #00c2ff,
+        #b4ff39
+    );
+
+    background-size: 400% 400%;
+    animation: heroGradient 15s ease infinite;
+
+    box-shadow:
+    0 0 40px rgba(0,0,0,0.5);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+
+    top: -250px;
+    right: -150px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;    
+}
+
+.hero p {
+    color: white;
+    font-size: 1.2rem;
+}
+
+@keyframes heroGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 .container {
     max-width: 900px;
     margin: auto;
