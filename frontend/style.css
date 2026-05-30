@@ -1,42 +1,80 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: Arial, sans-serif;
-    background: #101820;
-    color: white;
+    background: #0f172a;
+    color: #f8fafc;
+    min-height: 100vh;
+    padding: 40px;
 }
 
 .container {
-    width: 90%;
-    max-width: 500px;
-    margin: 60px auto;
-    padding: 25px;
-    background: #1c2b36;
-    border-radius: 12px;
-    text-align: center;
+    max-width: 900px;
+    margin: auto;
 }
 
 h1 {
-    color: #f2c94c;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 3rem;
 }
 
-select, button {
+p {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+select,
+button {
     width: 100%;
     padding: 12px;
-    margin-top: 15px;
-    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
     border: none;
     font-size: 16px;
 }
 
+select {
+    background: white;
+}
+
 button {
-    background: #f2c94c;
-    cursor: pointer;
+    background: #22c55e;
+    color: white;
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #16a34a;
 }
 
 .result {
-    margin-top: 25px;
-    padding: 15px;
-    background: #243b4a;
-    border-radius: 10px;
+    margin-top: 30px;
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.result h2 {
+    margin-bottom: 20px;
+}
+
+.result p {
+    text-align: left;
+    color: white;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+label {
+    font-weight: bold;
 }
