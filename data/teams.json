@@ -1,0 +1,338 @@
+[
+  {
+    "name": "France",
+    "rankingScore": 100,
+    "squadStrength": 96,
+    "worldCupHistory": 95,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Spain",
+    "rankingScore": 99,
+    "squadStrength": 97,
+    "worldCupHistory": 94,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Argentina",
+    "rankingScore": 98,
+    "squadStrength": 95,
+    "worldCupHistory": 99,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "England",
+    "rankingScore": 96,
+    "squadStrength": 95,
+    "worldCupHistory": 90,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Portugal",
+    "rankingScore": 94,
+    "squadStrength": 94,
+    "worldCupHistory": 88,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Brazil",
+    "rankingScore": 93,
+    "squadStrength": 95,
+    "worldCupHistory": 100,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Netherlands",
+    "rankingScore": 92,
+    "squadStrength": 91,
+    "worldCupHistory": 91,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Belgium",
+    "rankingScore": 90,
+    "squadStrength": 89,
+    "worldCupHistory": 84,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Germany",
+    "rankingScore": 89,
+    "squadStrength": 92,
+    "worldCupHistory": 98,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Croatia",
+    "rankingScore": 88,
+    "squadStrength": 86,
+    "worldCupHistory": 88,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Morocco",
+    "rankingScore": 87,
+    "squadStrength": 86,
+    "worldCupHistory": 82,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Uruguay",
+    "rankingScore": 86,
+    "squadStrength": 86,
+    "worldCupHistory": 93,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Colombia",
+    "rankingScore": 85,
+    "squadStrength": 85,
+    "worldCupHistory": 80,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Senegal",
+    "rankingScore": 84,
+    "squadStrength": 84,
+    "worldCupHistory": 77,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Switzerland",
+    "rankingScore": 83,
+    "squadStrength": 82,
+    "worldCupHistory": 80,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "USA",
+    "rankingScore": 82,
+    "squadStrength": 82,
+    "worldCupHistory": 76,
+    "homeAdvantage": 2
+  },
+  {
+    "name": "Mexico",
+    "rankingScore": 81,
+    "squadStrength": 80,
+    "worldCupHistory": 82,
+    "homeAdvantage": 2
+  },
+  {
+    "name": "Japan",
+    "rankingScore": 80,
+    "squadStrength": 81,
+    "worldCupHistory": 78,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Austria",
+    "rankingScore": 79,
+    "squadStrength": 80,
+    "worldCupHistory": 74,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Iran",
+    "rankingScore": 78,
+    "squadStrength": 77,
+    "worldCupHistory": 70,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Ecuador",
+    "rankingScore": 77,
+    "squadStrength": 78,
+    "worldCupHistory": 72,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "South Korea",
+    "rankingScore": 76,
+    "squadStrength": 77,
+    "worldCupHistory": 77,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Australia",
+    "rankingScore": 75,
+    "squadStrength": 74,
+    "worldCupHistory": 72,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Türkiye",
+    "rankingScore": 74,
+    "squadStrength": 78,
+    "worldCupHistory": 73,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Canada",
+    "rankingScore": 73,
+    "squadStrength": 76,
+    "worldCupHistory": 66,
+    "homeAdvantage": 2
+  },
+  {
+    "name": "Qatar",
+    "rankingScore": 72,
+    "squadStrength": 71,
+    "worldCupHistory": 64,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Norway",
+    "rankingScore": 71,
+    "squadStrength": 78,
+    "worldCupHistory": 63,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Scotland",
+    "rankingScore": 70,
+    "squadStrength": 72,
+    "worldCupHistory": 68,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Egypt",
+    "rankingScore": 69,
+    "squadStrength": 73,
+    "worldCupHistory": 66,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Ivory Coast",
+    "rankingScore": 68,
+    "squadStrength": 72,
+    "worldCupHistory": 67,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Algeria",
+    "rankingScore": 67,
+    "squadStrength": 72,
+    "worldCupHistory": 69,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Czechia",
+    "rankingScore": 66,
+    "squadStrength": 72,
+    "worldCupHistory": 70,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Tunisia",
+    "rankingScore": 65,
+    "squadStrength": 68,
+    "worldCupHistory": 66,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Paraguay",
+    "rankingScore": 64,
+    "squadStrength": 68,
+    "worldCupHistory": 70,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "South Africa",
+    "rankingScore": 63,
+    "squadStrength": 66,
+    "worldCupHistory": 65,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Saudi Arabia",
+    "rankingScore": 62,
+    "squadStrength": 66,
+    "worldCupHistory": 68,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Panama",
+    "rankingScore": 61,
+    "squadStrength": 63,
+    "worldCupHistory": 58,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Ghana",
+    "rankingScore": 60,
+    "squadStrength": 70,
+    "worldCupHistory": 73,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "rankingScore": 59,
+    "squadStrength": 68,
+    "worldCupHistory": 61,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Iraq",
+    "rankingScore": 58,
+    "squadStrength": 62,
+    "worldCupHistory": 55,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Uzbekistan",
+    "rankingScore": 57,
+    "squadStrength": 63,
+    "worldCupHistory": 52,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "New Zealand",
+    "rankingScore": 56,
+    "squadStrength": 59,
+    "worldCupHistory": 57,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Jordan",
+    "rankingScore": 55,
+    "squadStrength": 60,
+    "worldCupHistory": 51,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Congo DR",
+    "rankingScore": 54,
+    "squadStrength": 66,
+    "worldCupHistory": 55,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Haiti",
+    "rankingScore": 53,
+    "squadStrength": 57,
+    "worldCupHistory": 54,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Cape Verde",
+    "rankingScore": 52,
+    "squadStrength": 64,
+    "worldCupHistory": 50,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Curaçao",
+    "rankingScore": 51,
+    "squadStrength": 58,
+    "worldCupHistory": 50,
+    "homeAdvantage": 0
+  },
+  {
+    "name": "Sweden",
+    "rankingScore": 50,
+    "squadStrength": 77,
+    "worldCupHistory": 84,
+    "homeAdvantage": 0
+  }
+]

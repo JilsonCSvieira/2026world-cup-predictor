@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Cup Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <div class="container">
+        <h1>World Cup 2026 Predictor</h1>
+        <p>Predict real World Cup matches based on team strength and match data.</p>
+<label for="groupFilter">Filter by Group</label>
+<select id="groupFilter">
+    <option value="All">All Groups</option>
+    <option value="A">Group A</option>
+    <option value="B">Group B</option>
+    <option value="C">Group C</option>
+    <option value="D">Group D</option>
+    <option value="E">Group E</option>
+    <option value="F">Group F</option>
+    <option value="G">Group G</option>
+    <option value="H">Group H</option>
+    <option value="I">Group I</option>
+    <option value="J">Group J</option>
+    <option value="K">Group K</option>
+    <option value="L">Group L</option>
+</select>
+
+<label for="matchSelect">Select a Match</label>
+<select id="matchSelect">
+        
+            <option value="">Loading matches...</option>
+        </select>
+
+        <button id="predictBtn">Predict Match</button>
+
+        <div id="result" class="result">
+            <h2>Prediction</h2>
+            <p id="matchInfo">Match: -</p>
+            <p id="winner">Predicted Winner: -</p>
+            <p id="chance">Win Chance: -</p>
+            <p id="teamScores">Team Scores: -</p>
+            <p id="reason">Reason: -</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
