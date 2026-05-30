@@ -480,6 +480,85 @@ worldCupBtn.addEventListener("click", function () {
     const final = simulateKnockoutRound(semifinals.winners);
 
     const champion = final.winners[0];
+    displayWorldCupSimulation(
+        roundOf32,
+        roundOf16,
+        quarterfinals,
+        semifinals,
+        final,
+        champion,
+        qualifiedTeams
+    );
+});
+
+  function displayWorldCupSimulation(roundOf32, roundOf16, quarterfinals, semifinals, final, champion, qualifiedTeams) {
+    worldCupOutput.innerHTML = "";
+
+    const championCard = document.createElement("div");
+    championCard.classList.add("champion-card");
+
+    championCard.innerHTML = `
+        <h3>🏆 Predicted World Cup Champion</h3>
+        <p>${champion}</p>
+    `;
+
+    worldCupOutput.appendChild(championCard);
+
+    displayQualifiedTeams(qualifiedTeams);
+
+    displayRound("Round of 32", roundOf32);
+    displayRound("Round of 16", roundOf16);
+    displayRound("Quarterfinals", quarterfinals);
+    displayRound("Semifinals", semifinals);
+    displayRound("Final", final);
+}
+
+function displayQualifiedTeams(qualifiedTeams) {
+    const qualifiedCard = document.createElement("div");
+    qualifiedCard.classList.add("round-card");
+
+    const groupWinners = qualifiedTeams.filter(team => team.position === 1);
+    const runnersUp = qualifiedTeams.filter(team => team.position === 2);
+    const thirdPlaceTeams = qualifiedTeams.filter(team => team.position === 3);
+
+    let html = `<h3>Qualified Teams</h3>`;
+
+    html += `<p><strong>Group Winners:</strong> ${groupWinners.map(team => team.name).join(", ")}</p>`;
+    html += `<p><strong>Runners-up:</strong> ${runnersUp.map(team => team.name).join(", ")}</p>`;
+    html += `<p><strong>Best Third-Place Teams:</strong> ${thirdPlaceTeams.map(team => team.name).join(", ")}</p>`;
+
+    qualifiedCard.innerHTML = html;
+    worldCupOutput.appendChild(qualifiedCard);
+}
+
+function displayRound(roundName, roundData) {
+    const roundCard = document.createElement("div");
+    roundCard.classList.add("round-card");
+
+    let matchesHTML = `<h3>${roundName}</h3>`;
+
+    roundData.matchesPlayed.forEach(match => {
+        matchesHTML += `
+            <p>${match.teamA} vs ${match.teamB} → <strong>${match.winner}</strong></p>
+        `;
+    });
+
+    roundCard.innerHTML = matchesHTML;
+    worldCupOutput.appendChild(roundCard);
+}
+
+worldCupBtn.addEventListener("click", function () {
+    const standings = simulateGroupStageOnly();
+    const qualifiedTeams = getQualifiedTeams(standings);
+
+    const roundOf32Teams = createRoundOf32Pairings(qualifiedTeams);
+    const roundOf32 = simulateKnockoutRound(roundOf32Teams);
+    const roundOf16 = simulateKnockoutRound(roundOf32.winners);
+    const quarterfinals = simulateKnockoutRound(roundOf16.winners);
+    const semifinals = simulateKnockoutRound(quarterfinals.winners);
+    const final = simulateKnockoutRound(semifinals.winners);
+
+    const champion = final.winners[0];
 
     displayWorldCupSimulation(
         roundOf32,
@@ -487,6 +566,7 @@ worldCupBtn.addEventListener("click", function () {
         quarterfinals,
         semifinals,
         final,
-        champion
+        champion,
+        qualifiedTeams
     );
 });
