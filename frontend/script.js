@@ -3,6 +3,8 @@ const predictBtn = document.getElementById("predictBtn");
 const groupFilter = document.getElementById("groupFilter");
 const simulateBtn = document.getElementById("simulateBtn");
 const standingsDiv = document.getElementById("standings");
+const worldCupBtn = document.getElementById("worldCupBtn");
+const worldCupOutput = document.getElementById("worldCupOutput");
 
 const winner = document.getElementById("winner");
 const chance = document.getElementById("chance");
@@ -119,6 +121,40 @@ predictBtn.addEventListener("click", function () {
     teamScores.textContent = `Team Scores: ${teamA.name} ${teamAScore} - ${teamB.name} ${teamBScore}`;
     reason.textContent = `Reason: ${predictionReason}`;
 
+function simulateMatch(teamA, teamB) {
+    const teamAScore = getTotalScore(teamA);
+    const teamBScore = getTotalScore(teamB);
+
+    const totalScore = teamAScore + teamBScore;
+    let teamAChance = teamAScore / totalScore;
+    let teamBChance = teamBScore / totalScore;
+
+    const scoreDifference = Math.abs(teamAScore - teamBScore);
+
+    let drawChance;
+
+    if (scoreDifference < 15) {
+        drawChance = 0.30;
+    } else if (scoreDifference < 40) {
+        drawChance = 0.22;
+    } else {
+        drawChance = 0.12;
+    }
+
+    teamAChance = teamAChance * (1 - drawChance);
+    teamBChance = teamBChance * (1 - drawChance);
+
+    const randomNumber = Math.random();
+
+    if (randomNumber < teamAChance) {
+        return "teamA";
+    } else if (randomNumber < teamAChance + teamBChance) {
+        return "teamB";
+    } else {
+        return "draw";
+    }
+}
+
 simulateBtn.addEventListener("click", function () {
     const standings = {};
 
@@ -141,23 +177,24 @@ simulateBtn.addEventListener("click", function () {
         const teamAScore = getTotalScore(teamA);
         const teamBScore = getTotalScore(teamB);
 
-        if (teamAScore > teamBScore) {
-            standings[match.group][teamA.name].points += 3;
-            standings[match.group][teamA.name].wins += 1;
-            standings[match.group][teamB.name].losses += 1;
-        }
-        else if (teamBScore > teamAScore) {
-            standings[match.group][teamB.name].points += 3;
-            standings[match.group][teamB.name].wins += 1;
-            standings[match.group][teamA.name].losses += 1;
-        }
-        else {
-            standings[match.group][teamA.name].points += 1;
-            standings[match.group][teamB.name].points += 1;
-            standings[match.group][teamA.name].draws += 1;
-            standings[match.group][teamB.name].draws += 1;
-        }
+    const result = simulateMatch(teamA, teamB);
 
+if (result === "teamA") {
+    standings[match.group][teamA.name].points += 3;
+    standings[match.group][teamA.name].wins += 1;
+    standings[match.group][teamB.name].losses += 1;
+}
+else if (result === "teamB") {
+    standings[match.group][teamB.name].points += 3;
+    standings[match.group][teamB.name].wins += 1;
+    standings[match.group][teamA.name].losses += 1;
+}
+else {
+    standings[match.group][teamA.name].points += 1;
+    standings[match.group][teamB.name].points += 1;
+    standings[match.group][teamA.name].draws += 1;
+    standings[match.group][teamB.name].draws += 1;
+}    
         standings[match.group][teamA.name].played += 1;
         standings[match.group][teamB.name].played += 1;
     });
@@ -200,7 +237,20 @@ function displayStandings(standings) {
 
         const teamsArray = Object.values(standings[group]);
 
-        teamsArray.sort((a, b) => b.points - a.points);
+    teamsArray.sort((a, b) => {
+        if (b.points !== a.points) {
+            return b.points - a.points;
+    }
+
+        if (b.wins !== a.wins) {
+            return b.wins - a.wins;
+    }
+
+    const teamAStrength = getTotalScore(findTeam(a.team));
+    const teamBStrength = getTotalScore(findTeam(b.team));
+
+    return teamBStrength - teamAStrength;
+});
 
         teamsArray.forEach(team => {
             const row = document.createElement("tr");
@@ -219,5 +269,84 @@ function displayStandings(standings) {
 
         standingsDiv.appendChild(table);
     });
-}    
+} 
+function getQualifiedTeams(standings) {
+    let qualifiedTeams = [];
+    let thirdPlaceTeams = [];
+
+    const groups = Object.keys(standings).sort();
+
+    groups.forEach(group => {
+        const teamsArray = Object.values(standings[group]);
+
+        teamsArray.sort((a, b) => {
+            if (b.points !== a.points) return b.points - a.points;
+            if (b.wins !== a.wins) return b.wins - a.wins;
+
+            const teamAStrength = getTotalScore(findTeam(a.team));
+            const teamBStrength = getTotalScore(findTeam(b.team));
+
+            return teamBStrength - teamAStrength;
+        });
+
+        qualifiedTeams.push(teamsArray[0].team);
+        qualifiedTeams.push(teamsArray[1].team);
+        thirdPlaceTeams.push(teamsArray[2]);
+    });
+
+    thirdPlaceTeams.sort((a, b) => {
+        if (b.points !== a.points) return b.points - a.points;
+        if (b.wins !== a.wins) return b.wins - a.wins;
+
+        const teamAStrength = getTotalScore(findTeam(a.team));
+        const teamBStrength = getTotalScore(findTeam(b.team));
+
+        return teamBStrength - teamAStrength;
+    });
+
+    const bestThirdPlaceTeams = thirdPlaceTeams.slice(0, 8);
+
+    bestThirdPlaceTeams.forEach(team => {
+        qualifiedTeams.push(team.team);
+    });
+
+    return qualifiedTeams;
+} 
+function simulateKnockoutRound(teamsList) {
+    const winners = [];
+    const matchesPlayed = [];
+
+    for (let i = 0; i < teamsList.length; i += 2) {
+        const teamA = findTeam(teamsList[i]);
+        const teamB = findTeam(teamsList[i + 1]);
+
+        const result = simulateMatch(teamA, teamB);
+
+        let winnerName;
+
+        if (result === "teamA") {
+            winnerName = teamA.name;
+        } else if (result === "teamB") {
+            winnerName = teamB.name;
+        } else {
+            const teamAScore = getTotalScore(teamA);
+            const teamBScore = getTotalScore(teamB);
+
+            winnerName = teamAScore >= teamBScore ? teamA.name : teamB.name;
+        }
+
+        winners.push(winnerName);
+
+        matchesPlayed.push({
+            teamA: teamA.name,
+            teamB: teamB.name,
+            winner: winnerName
+        });
+    }
+
+    return {
+        winners: winners,
+        matchesPlayed: matchesPlayed
+    };
+}  
 });
