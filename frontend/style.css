@@ -11,6 +11,17 @@ body {
     min-height: 100vh;
     padding: 40px;
 }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(255, 77, 31, 0.35), transparent 30%),
+        radial-gradient(circle at top right, rgba(0, 194, 255, 0.35), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(180, 255, 57, 0.25), transparent 35%),
+        linear-gradient(135deg, #0f172a, #111827);
+    z-index: -2;
+}
 
 body::after {
     content: "";
@@ -36,6 +47,51 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-icon {
+    font-size: 2.2rem;
+}
+
+.brand h2 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.brand p {
+    color: #22c55e;
+    text-align: left;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #22c55e;
+}
+
+.year-badge {
+    color: #22c55e;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
 .brand {
@@ -388,4 +444,40 @@ label {
 .action-card p {
     color: #94a3b8;
     margin: 0;
+}
+
+.main-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 25px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.main-dashboard .hero {
+    margin-bottom: 0;
+    padding: 55px 25px;
+}
+
+.main-dashboard .hero h1 {
+    font-size: 3.8rem;
+    line-height: 1.05;
+    text-transform: uppercase;
+}
+
+.main-dashboard .hero span {
+    color: #a3ff12;
+}
+
+.champion-circle {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 20px auto;
 }
