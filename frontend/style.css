@@ -15,25 +15,20 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
+
     background:
-        radial-gradient(circle at top left, rgba(255, 77, 31, 0.35), transparent 30%),
-        radial-gradient(circle at top right, rgba(0, 194, 255, 0.35), transparent 30%),
-        radial-gradient(circle at bottom left, rgba(180, 255, 57, 0.25), transparent 35%),
-        linear-gradient(135deg, #0f172a, #111827);
+        linear-gradient(
+            rgba(5, 10, 25, 0.68),
+            rgba(5, 10, 25, 0.78)
+        ),
+        url("images/worldcup-bg.jpg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     z-index: -2;
 }
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(120deg, transparent 0%, transparent 45%, rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.05) 55%, transparent 55%),
-        linear-gradient(60deg, transparent 0%, transparent 45%, rgba(255,255,255,0.04) 45%, rgba(255,255,255,0.04) 55%, transparent 55%);
-    background-size: 220px 220px;
-    z-index: -1;
-}
-
 .navbar {
     max-width: 1200px;
     margin: 0 auto 35px auto;
@@ -203,7 +198,7 @@ body::after {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: auto;
 }
 
@@ -448,9 +443,9 @@ label {
 
 .main-dashboard {
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 1.7fr 1fr;
     gap: 25px;
-    align-items: center;
+    align-items: stretch;
     margin-bottom: 30px;
 }
 
@@ -480,4 +475,66 @@ label {
     justify-content: center;
     font-size: 3rem;
     margin: 20px auto;
+}
+
+.main-dashboard .info-card,
+.main-dashboard .champion-preview {
+    min-height: 310px;
+}
+
+.main-dashboard .hero {
+    min-height: 310px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quick-actions {
+    margin-top: 10px;
+}
+
+.control-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.control-card label,
+.control-card select {
+    grid-column: 1 / -1;
+}
+
+#worldCupBtn {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #a3ff12, #00e5ff);
+    color: #07111f;
+}
+
+#predictBtn {
+    background: linear-gradient(135deg, #a3ff12, #22c55e);
+    color: #07111f;
+}
+
+#simulateBtn {
+    background: transparent;
+    border: 2px solid #a3ff12;
+    color: white;
+}
+
+button {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.action-icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.action-card {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
