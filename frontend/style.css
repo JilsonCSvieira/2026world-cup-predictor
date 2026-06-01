@@ -21,7 +21,7 @@ body::before {
             rgba(5, 10, 25, 0.68),
             rgba(5, 10, 25, 0.78)
         ),
-        url("images/worldcup-bg.jpg.jpg");
+        url("images/worldcup-bg.jpg");
 
     background-size: cover;
     background-position: center;

@@ -482,25 +482,6 @@ function simulateGroupStageOnly() {
 
     return standings;
 } 
-function displayWorldCupSimulation(roundOf32, roundOf16, quarterfinals, semifinals, final, champion) {
-    worldCupOutput.innerHTML = "";
-
-    const championCard = document.createElement("div");
-    championCard.classList.add("champion-card");
-
-    championCard.innerHTML = `
-        <h3>🏆 Predicted World Cup Champion</h3>
-        <p>${champion}</p>
-    `;
-
-    worldCupOutput.appendChild(championCard);
-
-    displayRound("Round of 32", roundOf32);
-    displayRound("Round of 16", roundOf16);
-    displayRound("Quarterfinals", quarterfinals);
-    displayRound("Semifinals", semifinals);
-    displayRound("Final", final);
-}
 
 function displayRound(roundName, roundData) {
     const roundCard = document.createElement("div");
