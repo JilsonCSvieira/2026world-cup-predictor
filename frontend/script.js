@@ -63,6 +63,7 @@ const flagCodes = {
     "Sweden": "se",
     "Iran": "ir",
     "Austria": "at",
+    "Ecuador": "ec",
 };
 
 function getFlagImg(teamName) {
@@ -187,33 +188,49 @@ function simulateMatch(teamA, teamB) {
     const teamAScore = getTotalScore(teamA);
     const teamBScore = getTotalScore(teamB);
 
-    const totalScore = teamAScore + teamBScore;
-    let teamAChance = teamAScore / totalScore;
-    let teamBChance = teamBScore / totalScore;
-
     const scoreDifference = Math.abs(teamAScore - teamBScore);
 
-    let drawChance;
+    let favorite;
+    let underdog;
 
-    if (scoreDifference < 15) {
-        drawChance = 0.30;
-    } else if (scoreDifference < 40) {
-        drawChance = 0.22;
+    if (teamAScore >= teamBScore) {
+        favorite = "teamA";
+        underdog = "teamB";
     } else {
-        drawChance = 0.12;
+        favorite = "teamB";
+        underdog = "teamA";
     }
 
-    teamAChance = teamAChance * (1 - drawChance);
-    teamBChance = teamBChance * (1 - drawChance);
+    let favoriteChance;
+    let drawChance;
+    let underdogChance;
+
+    if (scoreDifference >= 60) {
+        favoriteChance = 0.90;
+        drawChance = 0.07;
+        underdogChance = 0.03;
+    } else if (scoreDifference >= 35) {
+        favoriteChance = 0.78;
+        drawChance = 0.14;
+        underdogChance = 0.08;
+    } else if (scoreDifference >= 15) {
+        favoriteChance = 0.65;
+        drawChance = 0.22;
+        underdogChance = 0.13;
+    } else {
+        favoriteChance = 0.48;
+        drawChance = 0.30;
+        underdogChance = 0.22;
+    }
 
     const randomNumber = Math.random();
 
-    if (randomNumber < teamAChance) {
-        return "teamA";
-    } else if (randomNumber < teamAChance + teamBChance) {
-        return "teamB";
-    } else {
+    if (randomNumber < favoriteChance) {
+        return favorite;
+    } else if (randomNumber < favoriteChance + drawChance) {
         return "draw";
+    } else {
+        return underdog;
     }
 }
 
@@ -318,7 +335,7 @@ function displayStandings(standings) {
             const row = document.createElement("tr");
 
             row.innerHTML = `
-                <td>${team.team}</td>
+                <td>${getFlagImg(team.team)} ${team.team}</td>
                 <td>${team.played}</td>
                 <td>${team.wins}</td>
                 <td>${team.draws}</td>
