@@ -15,56 +15,66 @@ const teamScores = document.getElementById("teamScores");
 
 let matches = [];
 let teams = [];
-const flags = {
-    "Argentina": "🇦🇷",
-    "Brazil": "🇧🇷",
-    "France": "🇫🇷",
-    "Spain": "🇪🇸",
-    "England": "🏴",
-    "Portugal": "🇵🇹",
-    "Germany": "🇩🇪",
-    "Netherlands": "🇳🇱",
-    "Belgium": "🇧🇪",
-    "Croatia": "🇭🇷",
-    "Morocco": "🇲🇦",
-    "Uruguay": "🇺🇾",
-    "Colombia": "🇨🇴",
-    "Senegal": "🇸🇳",
-    "Switzerland": "🇨🇭",
-    "USA": "🇺🇸",
-    "Mexico": "🇲🇽",
-    "Canada": "🇨🇦",
-    "Japan": "🇯🇵",
-    "South Korea": "🇰🇷",
-    "Australia": "🇦🇺",
-    "Türkiye": "🇹🇷",
-    "Qatar": "🇶🇦",
-    "Norway": "🇳🇴",
-    "Scotland": "🏴",
-    "Egypt": "🇪🇬",
-    "Ivory Coast": "🇨🇮",
-    "Algeria": "🇩🇿",
-    "Czechia": "🇨🇿",
-    "Tunisia": "🇹🇳",
-    "Paraguay": "🇵🇾",
-    "South Africa": "🇿🇦",
-    "Saudi Arabia": "🇸🇦",
-    "Panama": "🇵🇦",
-    "Ghana": "🇬🇭",
-    "Bosnia and Herzegovina": "🇧🇦",
-    "Iraq": "🇮🇶",
-    "Uzbekistan": "🇺🇿",
-    "New Zealand": "🇳🇿",
-    "Jordan": "🇯🇴",
-    "Congo DR": "🇨🇩",
-    "Haiti": "🇭🇹",
-    "Cape Verde": "🇨🇻",
-    "Curaçao": "🇨🇼",
-    "Sweden": "🇸🇪",
-    "Iran": "🇮🇷"
+const flagCodes = {
+    "Argentina": "ar",
+    "Brazil": "br",
+    "France": "fr",
+    "Spain": "es",
+    "England": "gb-eng",
+    "Portugal": "pt",
+    "Germany": "de",
+    "Netherlands": "nl",
+    "Belgium": "be",
+    "Croatia": "hr",
+    "Morocco": "ma",
+    "Uruguay": "uy",
+    "Colombia": "co",
+    "Senegal": "sn",
+    "Switzerland": "ch",
+    "USA": "us",
+    "Mexico": "mx",
+    "Canada": "ca",
+    "Japan": "jp",
+    "South Korea": "kr",
+    "Australia": "au",
+    "Türkiye": "tr",
+    "Qatar": "qa",
+    "Norway": "no",
+    "Scotland": "gb-sct",
+    "Egypt": "eg",
+    "Ivory Coast": "ci",
+    "Algeria": "dz",
+    "Czechia": "cz",
+    "Tunisia": "tn",
+    "Paraguay": "py",
+    "South Africa": "za",
+    "Saudi Arabia": "sa",
+    "Panama": "pa",
+    "Ghana": "gh",
+    "Bosnia and Herzegovina": "ba",
+    "Iraq": "iq",
+    "Uzbekistan": "uz",
+    "New Zealand": "nz",
+    "Jordan": "jo",
+    "Congo DR": "cd",
+    "Haiti": "ht",
+    "Cape Verde": "cv",
+    "Curaçao": "cw",
+    "Sweden": "se",
+    "Iran": "ir",
+    "Austria": "at",
 };
-function getFlag(teamName) {
-    return "";
+
+function getFlagImg(teamName) {
+    const code = flagCodes[teamName];
+
+    console.log("Flag test:", teamName, code);
+
+    if (!code) {
+        return "";
+    }
+
+    return `<img class="flag-img" src="https://flagcdn.com/w40/${code}.png" alt="${teamName} flag">`;
 }
 
 fetch("../data/matches.json")
@@ -491,37 +501,20 @@ function displayRound(roundName, roundData) {
 
     roundData.matchesPlayed.forEach(match => {
         matchesHTML += `
-            <p>${match.teamA} vs ${match.teamB} → <strong>${match.winner}</strong></p>
+            <p>
+                ${getFlagImg(match.teamA)} ${match.teamA}
+                vs
+                ${getFlagImg(match.teamB)} ${match.teamB}
+                →
+                <strong>${getFlagImg(match.winner)} ${match.winner}</strong>
+            </p>
         `;
     });
 
     roundCard.innerHTML = matchesHTML;
-
     worldCupOutput.appendChild(roundCard);
 }
 
-worldCupBtn.addEventListener("click", function () {
-    const standings = simulateGroupStageOnly();
-    const qualifiedTeams = getQualifiedTeams(standings);
-
-    const roundOf32Teams = createRoundOf32Pairings(qualifiedTeams);
-    const roundOf32 = simulateKnockoutRound(roundOf32Teams);
-    const roundOf16 = simulateKnockoutRound(roundOf32.winners);
-    const quarterfinals = simulateKnockoutRound(roundOf16.winners);
-    const semifinals = simulateKnockoutRound(quarterfinals.winners);
-    const final = simulateKnockoutRound(semifinals.winners);
-
-    const champion = final.winners[0];
-    displayWorldCupSimulation(
-        roundOf32,
-        roundOf16,
-        quarterfinals,
-        semifinals,
-        final,
-        champion,
-        qualifiedTeams
-    );
-});
 
   function displayWorldCupSimulation(roundOf32, roundOf16, quarterfinals, semifinals, final, champion, qualifiedTeams) {
     worldCupOutput.innerHTML = "";
@@ -563,21 +556,6 @@ function displayQualifiedTeams(qualifiedTeams) {
     worldCupOutput.appendChild(qualifiedCard);
 }
 
-function displayRound(roundName, roundData) {
-    const roundCard = document.createElement("div");
-    roundCard.classList.add("round-card");
-
-    let matchesHTML = `<h3>${roundName}</h3>`;
-
-    roundData.matchesPlayed.forEach(match => {
-        matchesHTML += `
-            <p>${match.teamA} vs ${match.teamB} → <strong>${match.winner}</strong></p>
-        `;
-    });
-
-    roundCard.innerHTML = matchesHTML;
-    worldCupOutput.appendChild(roundCard);
-}
 
 worldCupBtn.addEventListener("click", function () {
     const standings = simulateGroupStageOnly();
