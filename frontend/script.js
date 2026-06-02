@@ -12,6 +12,10 @@ const reason = document.getElementById("reason");
 
 const matchInfo = document.getElementById("matchInfo");
 const teamScores = document.getElementById("teamScores");
+const championCardTitle = document.getElementById("championCardTitle");
+const championCardIcon = document.getElementById("championCardIcon");
+const championCardName = document.getElementById("championCardName");
+const championCardSubtitle = document.getElementById("championCardSubtitle");
 
 let matches = [];
 let teams = [];
@@ -586,6 +590,10 @@ worldCupBtn.addEventListener("click", function () {
     const final = simulateKnockoutRound(semifinals.winners);
 
     const champion = final.winners[0];
+    championCardTitle.textContent = "🏆 Predicted Champion";
+    championCardIcon.innerHTML = getFlagImg(champion);
+    championCardName.textContent = champion;
+    championCardSubtitle.textContent = "2026 Simulation Winner";
 
     displayWorldCupSimulation(
         roundOf32,
