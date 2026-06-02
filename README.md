@@ -2,6 +2,10 @@ World Cup 2026 Predictor
 
 A web application that predicts FIFA World Cup 2026 group-stage matches using team ratings, squad strength, World Cup history, and host nation advantage.
 
+🌐 Live Demo
+
+https://jilsoncsvieira.github.io/2026world-cup-predictor/frontend/
+
 Features
 Predicts all 72 FIFA World Cup 2026 group-stage matches
 Includes data for all 48 participating teams
@@ -36,17 +40,16 @@ Win probability is calculated using:
 
 Team Score / (Team A Score + Team B Score)
 
-Current Features
-
-✅ Match Selection
-
-✅ Group Filtering
-
-✅ Dynamic Win Probability Calculation
-
-✅ Intelligent Prediction Reasons
-
-✅ Real World Cup 2026 Group Stage Matches
+✨ Features
+Predict individual FIFA World Cup 2026 matches
+Simulate the complete group stage
+Simulate the entire World Cup tournament
+Dynamic champion prediction
+Team flags displayed throughout the tournament
+Group standings generation
+Knockout stage simulation
+Responsive design for desktop and mobile devices
+FIFA-inspired user interface
 
 Future Improvements
 Team Flags
