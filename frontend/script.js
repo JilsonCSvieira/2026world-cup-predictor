@@ -8,6 +8,7 @@ const worldCupOutput = document.getElementById("worldCupOutput");
 const groupsBtn = document.getElementById("groupsBtn");
 const groupsSection = document.getElementById("groupsSection");
 const groupsGrid = document.getElementById("groupsGrid");
+const capeVerdeBtn = document.getElementById("capeVerdeBtn");
 
 const winner = document.getElementById("winner");
 const chance = document.getElementById("chance");
@@ -648,4 +649,24 @@ function displayGroups() {
 
         groupsGrid.appendChild(groupCard);
     });
+
+
 }
+
+capeVerdeBtn.addEventListener("click", function () {
+    championCardTitle.textContent = "🏆 Predicted Champion";
+    championCardIcon.innerHTML = getFlagImg("Cape Verde");
+    championCardName.textContent = "Cape Verde";
+    championCardSubtitle.textContent = "2026 Simulation Winner";
+
+    worldCupOutput.innerHTML = `
+        <div class="champion-card">
+            <h3>🏆 Predicted World Cup Champion</h3>
+            <p>${getFlagImg("Cape Verde")} Cape Verde</p>
+        </div>
+    `;
+
+    worldCupResult.scrollIntoView({
+        behavior: "smooth"
+    });
+});

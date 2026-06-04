@@ -582,3 +582,16 @@ button {
     align-items: center;
     gap: 8px;
 }
+
+.cape-verde-btn {
+    margin-top: 35px;
+    background: linear-gradient(135deg, #003893, #cf2027, #f7d116);
+    color: white;
+    font-weight: 900;
+    border: 2px solid white;
+    box-shadow: 0 0 25px rgba(0, 56, 147, 0.5);
+}
+
+.cape-verde-btn:hover {
+    transform: scale(1.03);
+}
