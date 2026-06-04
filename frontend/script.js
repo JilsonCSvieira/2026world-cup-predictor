@@ -5,6 +5,9 @@ const simulateBtn = document.getElementById("simulateBtn");
 const standingsDiv = document.getElementById("standings");
 const worldCupBtn = document.getElementById("worldCupBtn");
 const worldCupOutput = document.getElementById("worldCupOutput");
+const groupsBtn = document.getElementById("groupsBtn");
+const groupsSection = document.getElementById("groupsSection");
+const groupsGrid = document.getElementById("groupsGrid");
 
 const winner = document.getElementById("winner");
 const chance = document.getElementById("chance");
@@ -604,4 +607,45 @@ worldCupBtn.addEventListener("click", function () {
         champion,
         qualifiedTeams
     );
+
+groupsBtn.addEventListener("click", function () {
+    displayGroups();
+    groupsSection.scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+function displayGroups() {
+    groupsGrid.innerHTML = "";
+
+    const groupedTeams = {};
+
+    matches.forEach(match => {
+        if (!groupedTeams[match.group]) {
+            groupedTeams[match.group] = new Set();
+        }
+
+        groupedTeams[match.group].add(match.teamA);
+        groupedTeams[match.group].add(match.teamB);
+    });
+
+    const groups = Object.keys(groupedTeams).sort();
+
+    groups.forEach(group => {
+        const groupCard = document.createElement("div");
+        groupCard.classList.add("group-card");
+
+        const teams = Array.from(groupedTeams[group]);
+
+        groupCard.innerHTML = `
+            <h3>Group ${group}</h3>
+            ${teams.map(team => `<p>${getFlagImg(team)} ${team}</p>`).join("")}
+        `;
+        
+        groupsGrid.appendChild(groupCard);
+    });
+
+    groupsSection.style.display = "block";
+}
+
 });
