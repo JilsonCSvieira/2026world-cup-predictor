@@ -71,10 +71,10 @@
         <p>Match outcomes</p>
     </div>
 
-    <div class="action-card">
-        <div class="action-icon">🏆</div>
-        <h3>Champion</h3>
-        <p>Tournament winner</p>
+    <div class="action-card" id="myPredictionBtn">
+        <div class="action-icon">📝</div>
+        <h3>My Predictions</h3>
+        <p>Build your bracket</p>
     </div>
 
 </div>
@@ -82,6 +82,22 @@
         <h2>World Cup 2026 Groups</h2>
         <div id="groupsGrid"></div>
     </div>
+
+        <div id="myPredictionSection" class="result">
+            <h2>📝 My World Cup Prediction</h2>
+            
+            <p>
+               Build your own World Cup bracket by choosing the teams you believe will advance. 
+            </p>
+
+            <div id="predictionGroups"></div>
+            <h3>Pick the 8 Best Third-Place Teams</h3>
+            <div id="thirdPlaceSelections"></div>
+
+            <button id="generateUserBracketBtn">Generate My Bracket</button>
+            
+            <div id="userBracketOutput"></div>
+        </div>
 
         <div class="control-card">
             <button id="worldCupBtn">Simulate Entire World Cup</button>

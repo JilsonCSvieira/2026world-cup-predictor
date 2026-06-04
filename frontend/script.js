@@ -9,6 +9,12 @@ const groupsBtn = document.getElementById("groupsBtn");
 const groupsSection = document.getElementById("groupsSection");
 const groupsGrid = document.getElementById("groupsGrid");
 const capeVerdeBtn = document.getElementById("capeVerdeBtn");
+const myPredictionBtn = document.getElementById("myPredictionBtn");
+const myPredictionSection = document.getElementById("myPredictionSection");
+const predictionGroups = document.getElementById("predictionGroups");
+const thirdPlaceSelections = document.getElementById("thirdPlaceSelections");
+const generateUserBracketBtn = document.getElementById("generateUserBracketBtn");
+const userBracketOutput = document.getElementById("userBracketOutput");
 
 const winner = document.getElementById("winner");
 const chance = document.getElementById("chance");
@@ -686,4 +692,84 @@ capeVerdeBtn.addEventListener("click", function () {
     worldCupResult.scrollIntoView({
         behavior: "smooth"
     });
+});
+
+myPredictionBtn.addEventListener("click", function () {
+    buildPredictionGroups();
+
+    myPredictionSection.style.display = "block";
+
+    myPredictionSection.scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+function buildPredictionGroups() {
+    predictionGroups.innerHTML = "";
+    thirdPlaceSelections.innerHTML = "";
+
+    const groupedTeams = {};
+
+    matches.forEach(match => {
+        if (!groupedTeams[match.group]) {
+            groupedTeams[match.group] = new Set();
+        }
+
+        groupedTeams[match.group].add(match.teamA);
+        groupedTeams[match.group].add(match.teamB);
+    });
+
+    const groups = Object.keys(groupedTeams).sort();
+
+    groups.forEach(group => {
+        const teams = Array.from(groupedTeams[group]);
+
+        const groupDiv = document.createElement("div");
+        groupDiv.classList.add("group-card");
+
+        groupDiv.innerHTML = `
+            <h3>Group ${group}</h3>
+
+            <label>1st Place</label>
+            <select>
+                ${teams.map(team => `<option value="${team}">${team}</option>`).join("")}
+            </select>
+
+            <label>2nd Place</label>
+            <select>
+                ${teams.map(team => `<option value="${team}">${team}</option>`).join("")}
+            </select>
+        `;
+
+        predictionGroups.appendChild(groupDiv);
+
+        const thirdPlaceDiv = document.createElement("div");
+        thirdPlaceDiv.classList.add("third-place-option");
+
+        thirdPlaceDiv.innerHTML = `
+            <label>
+                <input type="checkbox" value="${group}">
+                Group ${group} 3rd Place
+            </label>
+        `;
+
+        thirdPlaceSelections.appendChild(thirdPlaceDiv);
+    });
+}
+generateUserBracketBtn.addEventListener("click", function () {
+    const selectedThirdPlaces = Array.from(
+        document.querySelectorAll("#thirdPlaceSelections input:checked")
+    );
+
+    if (selectedThirdPlaces.length !== 8) {
+        alert("Please select exactly 8 third-place teams.");
+        return;
+    }
+
+    userBracketOutput.innerHTML = `
+        <div class="round-card">
+            <h3>My Bracket</h3>
+            <p>Third-place selections accepted. Next step: generate Round of 32.</p>
+        </div>
+    `;
 });
