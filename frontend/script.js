@@ -609,6 +609,9 @@ worldCupBtn.addEventListener("click", function () {
     );
 
 groupsBtn.addEventListener("click", function () {
+    console.log("Groups button clicked");
+    console.log("Matches loaded:", matches.length);
+
     displayGroups();
     groupsSection.scrollIntoView({
         behavior: "smooth"
