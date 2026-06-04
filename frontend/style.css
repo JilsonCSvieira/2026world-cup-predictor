@@ -564,6 +564,11 @@ button {
     padding: 20px;
     border: 2px solid #22c55e;
     box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+    transition: 0.3s;
+}
+
+.group-card:hover {
+    transform: translateY(-4px);
 }
 
 .group-card h3 {
@@ -594,4 +599,35 @@ button {
 
 .cape-verde-btn:hover {
     transform: scale(1.03);
+}
+
+.cape-verde-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.cape-verde-btn img {
+    width: 28px;
+    height: auto;
+}
+
+.champion-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.champion-preview h3,
+.champion-preview p,
+.champion-preview small {
+    text-align: center;
+}
+
+.championCardIcon,
+#championCardIcon {
+    margin-left: auto;
+    margin-right: auto;
 }

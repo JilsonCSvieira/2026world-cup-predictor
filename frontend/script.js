@@ -637,13 +637,30 @@ function displayGroups() {
     const groups = Object.keys(groupedTeams).sort();
 
     groups.forEach(group => {
-        const groupCard = document.createElement("div");
-        groupCard.classList.add("group-card");
+    const groupCard = document.createElement("div");
+groupCard.classList.add("group-card");
+
+const groupColors = {
+    "A": "#00c853",
+    "B": "#ff1744",
+    "C": "#ff9100",
+    "D": "#2979ff",
+    "E": "#aa00ff",
+    "F": "#00b8d4",
+    "G": "#ff6d00",
+    "H": "#00e676",
+    "I": "#d500f9",
+    "J": "#ff4081",
+    "K": "#00b0ff",
+    "L": "#ffd600"
+};
+
+groupCard.style.borderColor = groupColors[group];    
 
         const teams = Array.from(groupedTeams[group]);
 
         groupCard.innerHTML = `
-            <h3>Group ${group}</h3>
+            <h3 style="color:${groupColors[group]}">Group ${group}</h3>
             ${teams.map(team => `<p>${getFlagImg(team)} ${team}</p>`).join("")}
         `;
 
