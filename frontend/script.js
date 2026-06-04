@@ -593,6 +593,7 @@ worldCupBtn.addEventListener("click", function () {
     const final = simulateKnockoutRound(semifinals.winners);
 
     const champion = final.winners[0];
+
     championCardTitle.textContent = "🏆 Predicted Champion";
     championCardIcon.innerHTML = getFlagImg(champion);
     championCardName.textContent = champion;
@@ -607,18 +608,18 @@ worldCupBtn.addEventListener("click", function () {
         champion,
         qualifiedTeams
     );
+});
 
 groupsBtn.addEventListener("click", function () {
-    console.log("Groups button clicked");
-    console.log("Matches loaded:", matches.length);
-
     displayGroups();
+
     groupsSection.scrollIntoView({
         behavior: "smooth"
     });
 });
 
 function displayGroups() {
+    groupsSection.style.display = "block";
     groupsGrid.innerHTML = "";
 
     const groupedTeams = {};
@@ -644,11 +645,7 @@ function displayGroups() {
             <h3>Group ${group}</h3>
             ${teams.map(team => `<p>${getFlagImg(team)} ${team}</p>`).join("")}
         `;
-        
+
         groupsGrid.appendChild(groupCard);
     });
-
-    groupsSection.style.display = "block";
 }
-
-});
