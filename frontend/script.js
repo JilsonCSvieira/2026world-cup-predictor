@@ -15,6 +15,10 @@ const predictionGroups = document.getElementById("predictionGroups");
 const thirdPlaceSelections = document.getElementById("thirdPlaceSelections");
 const generateUserBracketBtn = document.getElementById("generateUserBracketBtn");
 const userBracketOutput = document.getElementById("userBracketOutput");
+const standingsBtn = document.getElementById("standingsBtn");
+const standingsResult = document.getElementById("standingsResult");
+const worldCupResult = document.getElementById("worldCupResult");
+const result = document.getElementById("result");
 
 const winner = document.getElementById("winner");
 const chance = document.getElementById("chance");
@@ -196,6 +200,10 @@ predictBtn.addEventListener("click", function () {
     chance.textContent = `${teamA.name}: ${teamAChance.toFixed(1)}% | ${teamB.name}: ${teamBChance.toFixed(1)}%`;
     teamScores.textContent = `Team Scores: ${teamA.name} ${teamAScore} - ${teamB.name} ${teamBScore}`;
     reason.textContent = `Reason: ${predictionReason}`;
+
+    result.scrollIntoView({
+        behavior: "smooth"
+        });
 });
 
 function simulateMatch(teamA, teamB) {
@@ -293,7 +301,12 @@ else {
     });
 
     displayStandings(standings);
+
+    standingsResult.scrollIntoView({
+        behavior: "smooth"
+    });
 });
+
 function createStanding(teamName) {
     return {
         team: teamName,
@@ -615,6 +628,10 @@ worldCupBtn.addEventListener("click", function () {
         champion,
         qualifiedTeams
     );
+
+    worldCupResult.scrollIntoView({
+        behavior: "smooth"
+    });
 });
 
 groupsBtn.addEventListener("click", function () {
@@ -859,4 +876,16 @@ document.getElementById("advanceUserRoundBtn").addEventListener("click", functio
 
         displayUserRound(nextRoundName, nextRoundMatches);
     });
+
+standingsBtn.addEventListener("click", function () {
+    standingsResult.scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+predictionsBtn.addEventListener("click", function () {
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+});
 }
