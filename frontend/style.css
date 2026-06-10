@@ -642,3 +642,50 @@ button {
     gap: 20px;
     margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+    body {
+        padding: 18px;
+    }
+
+    .navbar {
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .main-dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-dashboard .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #groupsGrid,
+    #predictionGroups {
+        grid-template-columns: 1fr;
+    }
+
+    .control-card {
+        grid-template-columns: 1fr;
+    }
+
+    .result {
+        padding: 18px;
+    }
+
+    .round-card p {
+        font-size: 0.95rem;
+    }
+}
