@@ -706,7 +706,6 @@ myPredictionBtn.addEventListener("click", function () {
 
 function buildPredictionGroups() {
     predictionGroups.innerHTML = "";
-    thirdPlaceSelections.innerHTML = "";
 
     const groupedTeams = {};
 
@@ -731,45 +730,133 @@ function buildPredictionGroups() {
             <h3>Group ${group}</h3>
 
             <label>1st Place</label>
-            <select>
+            <select class="first-place-select">
                 ${teams.map(team => `<option value="${team}">${team}</option>`).join("")}
             </select>
 
             <label>2nd Place</label>
-            <select>
+            <select class="second-place-select">
+                 ${teams.map(team => `<option value="${team}">${team}</option>`).join("")}
+            </select>
+
+            <label>Wild Card Candidate</label>
+            <select class="wildcard-select">
                 ${teams.map(team => `<option value="${team}">${team}</option>`).join("")}
             </select>
         `;
 
         predictionGroups.appendChild(groupDiv);
 
-        const thirdPlaceDiv = document.createElement("div");
-        thirdPlaceDiv.classList.add("third-place-option");
 
-        thirdPlaceDiv.innerHTML = `
-            <label>
-                <input type="checkbox" value="${group}">
-                Group ${group} 3rd Place
-            </label>
-        `;
-
-        thirdPlaceSelections.appendChild(thirdPlaceDiv);
     });
 }
 generateUserBracketBtn.addEventListener("click", function () {
-    const selectedThirdPlaces = Array.from(
-        document.querySelectorAll("#thirdPlaceSelections input:checked")
-    );
+    const firstPlaceTeams = Array.from(document.querySelectorAll(".first-place-select"))
+        .map(select => select.value);
 
-    if (selectedThirdPlaces.length !== 8) {
-        alert("Please select exactly 8 third-place teams.");
+    const secondPlaceTeams = Array.from(document.querySelectorAll(".second-place-select"))
+        .map(select => select.value);
+
+    const wildCardTeams = Array.from(document.querySelectorAll(".wildcard-select"))
+        .map(select => select.value)
+        .slice(0, 8);
+
+    const qualifiedTeams = [
+        ...firstPlaceTeams,
+        ...secondPlaceTeams,
+        ...wildCardTeams
+    ];
+
+    const uniqueTeams = new Set(qualifiedTeams);
+
+    if (uniqueTeams.size !== qualifiedTeams.length) {
+        alert("A team cannot qualify more than once. Please check your selections.");
         return;
     }
 
-    userBracketOutput.innerHTML = `
+    const roundOf32 = [];
+
+    for (let i = 0; i < qualifiedTeams.length; i += 2) {
+        roundOf32.push({
+            teamA: qualifiedTeams[i],
+            teamB: qualifiedTeams[i + 1]
+        });
+    }
+
+    displayUserRound("Round of 32", roundOf32);
+});
+
+function displayUserRound(roundName, roundMatches) {
+    let html = `
         <div class="round-card">
-            <h3>My Bracket</h3>
-            <p>Third-place selections accepted. Next step: generate Round of 32.</p>
+            <h3>🏆 ${roundName}</h3>
+    `;
+
+    roundMatches.forEach((match, index) => {
+        html += `
+            <div class="user-match-card">
+                <p>${getFlagImg(match.teamA)} ${match.teamA}</p>
+                <p>${getFlagImg(match.teamB)} ${match.teamB}</p>
+
+                <label>Pick Winner</label>
+                <select class="user-winner-select">
+                    <option value="${match.teamA}">${match.teamA}</option>
+                    <option value="${match.teamB}">${match.teamB}</option>
+                </select>
+            </div>
+        `;
+    });
+
+    html += `
+            <button id="advanceUserRoundBtn">Advance Winners</button>
         </div>
     `;
-});
+
+    userBracketOutput.innerHTML = html;
+
+document.getElementById("advanceUserRoundBtn").addEventListener("click", function () {
+        const winners = Array.from(document.querySelectorAll(".user-winner-select"))
+            .map(select => select.value);
+
+        if (winners.length === 1) {
+            const champion = winners[0];
+
+            userBracketOutput.innerHTML = `
+                <div class="champion-card">
+                    <h3>🏆 My Predicted World Cup Champion</h3>
+                    <p>${getFlagImg(champion)} ${champion}</p>
+                </div>
+            `;
+
+            championCardTitle.textContent = "🏆 My Predicted Champion";
+            championCardIcon.innerHTML = getFlagImg(champion);
+            championCardName.textContent = champion;
+            championCardSubtitle.textContent = "User Bracket Winner";
+
+            return;
+        }
+
+        const nextRoundMatches = [];
+
+        for (let i = 0; i < winners.length; i += 2) {
+            nextRoundMatches.push({
+                teamA: winners[i],
+                teamB: winners[i + 1]
+            });
+        }
+
+        let nextRoundName = "Next Round";
+
+        if (winners.length === 16) {
+            nextRoundName = "Round of 16";
+        } else if (winners.length === 8) {
+            nextRoundName = "Quarterfinals";
+        } else if (winners.length === 4) {
+            nextRoundName = "Semifinals";
+        } else if (winners.length === 2) {
+            nextRoundName = "Final";
+        }
+
+        displayUserRound(nextRoundName, nextRoundMatches);
+    });
+}
