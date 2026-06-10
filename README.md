@@ -1,69 +1,73 @@
-World Cup 2026 Predictor
+            FIFA World Cup 2026 Predictor
 
-A web application that predicts FIFA World Cup 2026 group-stage matches using team ratings, squad strength, World Cup history, and host nation advantage.
+I built this website only with academic goal!
+An interactive web application that simulates and predicts the FIFA World Cup 2026 using team ratings, squad strength, tournament history, and custom user predictions.
 
-🌐 Live Demo
+                    📸 Screenshots
+Homepage
+![Homepage](images/homepage.png)
 
+Mobile View
+![Mobile](images/mobile.png)
+
+                    🌐 Live Demo
 https://jilsoncsvieira.github.io/2026world-cup-predictor/frontend/
 
-Features
-Predicts all 72 FIFA World Cup 2026 group-stage matches
-Includes data for all 48 participating teams
-Calculates win probabilities dynamically
-Provides intelligent prediction explanations
-Filter matches by group (A–L)
-Java backend prediction engine
-HTML, CSS, and JavaScript frontend
+                    ✨ Features
+🔮 Match Predictor
+Predicts the outcome of any group-stage match
+Calculates winning probabilities
+Provides reasoning based on team statistics
 
-Tech Stack
-Frontend
+                    📊 Group Stage Simulator
+Simulates all group-stage matches
+Generates standings for all 12 groups
+Displays points, wins, draws, and losses
+
+                    🏆 Full World Cup Simulation
+Automatically advances qualified teams
+Simulates the Round of 32, Round of 16, Quarterfinals, Semifinals, and Final
+Predicts the World Cup Champion
+
+                    🌍 Interactive Groups View
+Displays all 12 World Cup groups
+Country flags for every team
+FIFA-inspired group colors
+
+                     Cape Verde Champion Mode
+Special feature that allows users to instantly make Cape Verde the World Cup Champion
+
+                    📝 User Prediction Mode
+Select group winners and runners-up
+Choose wild card teams
+Generate a custom knockout bracket
+Advance teams through every round
+Create your own World Cup Champion
+
+                    📱 Responsive Design
+Mobile-friendly layout
+Optimized for desktop and smartphone screens
+
+                    🛠️ Technologies Used
 HTML5
 CSS3
-JavaScript
-Backend
-Java
-Data
-JSON
+JavaScript (Vanilla JS)
+Git & GitHub
+GitHub Pages
 
+                    🚀 Future Improvements
+Real FIFA rankings integration
+Better knockout bracket visualization
+Save and share predictions
+Dark mode
+Team comparison tool
+Match score predictions
 
-Prediction Model
-
-Each team receives a score based on:
-
-Total Score =
-FIFA Ranking Score
-+ Squad Strength
-+ World Cup History
-+ Home Advantage
-
-Win probability is calculated using:
-
-Team Score / (Team A Score + Team B Score)
-
-✨ Features
-Predict individual FIFA World Cup 2026 matches
-Simulate the complete group stage
-Simulate the entire World Cup tournament
-Dynamic champion prediction
-Team flags displayed throughout the tournament
-Group standings generation
-Knockout stage simulation
-Responsive design for desktop and mobile devices
-FIFA-inspired user interface
-
-Future Improvements
-Team Flags
-Tournament Simulation
-Group Standings Generator
-Knockout Stage Prediction
-World Cup Winner Prediction
-API Integration for Live Rankings
-
-Author
+                    Author
 
 Jilson Vieira
 
 Computer Science Student at Quincy College
 
-GitHub: https://github.com/JilsonCSVieira
 LinkedIn: https://www.linkedin.com/in/jilsonvieira/
+Gmail:jilsonpipo06@gmail.com
