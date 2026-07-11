@@ -51,6 +51,7 @@
     </div>
 
 </div>
+
 <div class="quick-actions">
 
     <div class="action-card" id="groupsBtn">
@@ -59,13 +60,13 @@
          <p>View all groups</p>
     </div>
 
-    <div class="action-card">
+    <div class="action-card" id="standingsBtn">
         <div class="action-icon">📊</div>
         <h3>Standings</h3>
         <p>Live rankings</p>
     </div>
 
-    <div class="action-card">
+    <div class="action-card" id="predictionsBtn">
         <div class="action-icon">⚽</div>
         <h3>Predictions</h3>
         <p>Match outcomes</p>
@@ -78,6 +79,50 @@
     </div>
 
 </div>
+
+<section id="liveStandingsSection" class="result">
+    <div class="live-section-header">
+    <div>
+        <h2>🟢 Live World Cup Center</h2>
+        <p>Follow the tournament in real time.</p>
+    </div>
+</div>
+
+<div class="live-actions">
+
+    <button id="liveStandingsBtn">
+        📊 Live Standings
+    </button>
+
+    <button id="liveMatchesBtn">
+        ⚽ Live Matches
+    </button>
+
+    <button id="liveScheduleBtn">
+        📅 Schedule
+    </button>
+
+    <button id="liveBracketBtn">
+        🏆 Knockout Bracket
+    </button>
+
+</div>
+
+<div id="liveContent">
+
+    <p>
+        Choose an option above.
+    </p>
+
+</div>
+
+    <p id="liveStandingsStatus">
+        Click refresh to load the latest standings.
+    </p>
+
+    <div id="liveStandingsGrid"></div>
+</section>
+
      <div id="groupsSection" class="result">
         <h2>World Cup 2026 Groups</h2>
         <div id="groupsGrid"></div>

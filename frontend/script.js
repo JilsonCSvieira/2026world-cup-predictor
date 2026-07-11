@@ -30,9 +30,18 @@ const championCardTitle = document.getElementById("championCardTitle");
 const championCardIcon = document.getElementById("championCardIcon");
 const championCardName = document.getElementById("championCardName");
 const championCardSubtitle = document.getElementById("championCardSubtitle");
+const liveStandingsBtn = document.getElementById("liveStandingsBtn");
+const liveMatchesBtn = document.getElementById("liveMatchesBtn");
+const liveScheduleBtn = document.getElementById("liveScheduleBtn");
+const liveBracketBtn = document.getElementById("liveBracketBtn");
+const liveContent = document.getElementById("liveContent");
 
 let matches = [];
 let teams = [];
+const API_FOOTBALL_KEY = "f6f1073aeac62602164679a55cbfaa07";
+
+const WORLD_CUP_LEAGUE_ID = 1;
+const WORLD_CUP_SEASON = 2026;
 const flagCodes = {
     "Argentina": "ar",
     "Brazil": "br",
@@ -83,6 +92,8 @@ const flagCodes = {
     "Austria": "at",
     "Ecuador": "ec",
 };
+
+
 
 function getFlagImg(teamName) {
     const code = flagCodes[teamName];
@@ -877,6 +888,8 @@ document.getElementById("advanceUserRoundBtn").addEventListener("click", functio
         displayUserRound(nextRoundName, nextRoundMatches);
     });
 
+}
+
 standingsBtn.addEventListener("click", function () {
     standingsResult.scrollIntoView({
         behavior: "smooth"
@@ -888,4 +901,15 @@ predictionsBtn.addEventListener("click", function () {
         behavior: "smooth"
     });
 });
+
+liveStandingsBtn.addEventListener("click", function () {
+    loadLiveStandings();
+});
+
+async function loadLiveStandings() {
+
+    liveContent.innerHTML = `
+        <h3>Loading...</h3>
+    `;
+
 }

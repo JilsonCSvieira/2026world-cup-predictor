@@ -689,3 +689,32 @@ button {
         font-size: 0.95rem;
     }
 }
+
+.live-actions{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin:25px 0;
+}
+
+.live-actions button{
+    flex:1;
+    min-width:180px;
+    padding:15px;
+    font-size:1rem;
+    cursor:pointer;
+    border:none;
+    border-radius:12px;
+    background:#1d3557;
+    color:white;
+    transition:.3s;
+}
+
+.live-actions button:hover{
+    background:#2a4d7a;
+    transform:translateY(-3px);
+}
+
+#liveContent{
+    margin-top:25px;
+}
