@@ -31,6 +31,7 @@ const championCardIcon = document.getElementById("championCardIcon");
 const championCardName = document.getElementById("championCardName");
 const championCardSubtitle = document.getElementById("championCardSubtitle");
 const liveStandingsBtn = document.getElementById("liveStandingsBtn");
+const liveStandingsSection = document.getElementById("liveStandingsSection");
 const liveMatchesBtn = document.getElementById("liveMatchesBtn");
 const liveScheduleBtn = document.getElementById("liveScheduleBtn");
 const liveBracketBtn = document.getElementById("liveBracketBtn");
@@ -38,7 +39,7 @@ const liveContent = document.getElementById("liveContent");
 
 let matches = [];
 let teams = [];
-const API_FOOTBALL_KEY = "f6f1073aeac62602164679a55cbfaa07";
+const API_FOOTBALL_KEY = "1128728f670fe24dbba29ebb695436c2";
 
 const WORLD_CUP_LEAGUE_ID = 1;
 const WORLD_CUP_SEASON = 2026;
@@ -891,7 +892,8 @@ document.getElementById("advanceUserRoundBtn").addEventListener("click", functio
 }
 
 standingsBtn.addEventListener("click", function () {
-    standingsResult.scrollIntoView({
+    
+    liveStandingsSection.scrollIntoView({
         behavior: "smooth"
     });
 });
@@ -908,8 +910,51 @@ liveStandingsBtn.addEventListener("click", function () {
 
 async function loadLiveStandings() {
 
-    liveContent.innerHTML = `
-        <h3>Loading...</h3>
-    `;
+    liveContent.innerHTML = "<p>Loading...</p>";
+
+    try {
+
+        const response = await fetch(
+            `https://v3.football.api-sports.io/standings?league=${WORLD_CUP_LEAGUE_ID}&season=${WORLD_CUP_SEASON}`,
+            {
+                method: "GET",
+                headers: {
+                    "x-apisports-key": API_FOOTBALL_KEY
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+        liveContent.innerHTML = `
+              <h3>API Connected Successfully!</h3>
+
+            <pre style="
+                max-height:500px;
+                overflow:auto;
+                text-align:left;
+                background:#111;
+                color:#00ff88;
+                padding:20px;
+                border-radius:10px;
+                white-space:pre-wrap;
+            ">
+${JSON.stringify(data.response, null, 2)}
+    </pre>
+`;  
+
+    } catch(error){
+
+        console.error(error);
+
+        liveContent.innerHTML = `
+            <h3 style="color:red;">
+                API Connection Failed
+            </h3>
+        `;
+
+    }
 
 }
