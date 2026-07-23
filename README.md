@@ -1,5 +1,6 @@
             🏆FIFA World Cup 2026 Predictor
 
+Finished Project. 07/2026
 I built this website only with academic goal!
 An interactive web application that simulates and predicts the FIFA World Cup 2026 using team ratings, squad strength, tournament history, and custom user predictions.
 
