@@ -39,7 +39,7 @@ const liveContent = document.getElementById("liveContent");
 
 let matches = [];
 let teams = [];
-const API_FOOTBALL_KEY = "1128728f670fe24dbba29ebb695436c2";
+const API_FOOTBALL_KEY = "";
 
 const WORLD_CUP_LEAGUE_ID = 1;
 const WORLD_CUP_SEASON = 2026;
